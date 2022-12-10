@@ -15,5 +15,5 @@ spec:
     namespace: microservice
 
 # curl -k -X POST https://localhost:8443/api/v1/session -d $'{"username":"admin","password":"password"}'
-# curl -k https://localhost:8443/api/v1/applications/microservice -H "Authorization: Bearer token" -d '{"refresh":"true"}'
+# curl -k https://localhost:8443/api/v1/applications/microservice?refresh=true -H "Authorization: Bearer token"
 # curl -k -X POST https://localhost:8443/api/v1/applications/microservice/sync -H "Authorization: Bearer token"
