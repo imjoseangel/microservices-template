@@ -21,11 +21,8 @@
 # SOFTWARE.
 
 ---
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-namespace: microservice
+apiVersion: kustomize.config.k8s.io/v1alpha1
+kind: Component
 resources:
-  - git@github.com:imjoseangel/microservices-template.git/kustomize/base?ref=devel
-components:
-  - git@github.com:imjoseangel/microservices-template.git/kustomize/components/storage?ref=devel
+  - pvc.yaml
+  - storageclass.yaml
