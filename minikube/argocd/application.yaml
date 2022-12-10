@@ -1,0 +1,9 @@
+---
+project: default
+source:
+  repoURL: 'git@github.com:imjoseangel/microservices-template.git'
+  path: minikube
+  targetRevision: HEAD
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: microservice
