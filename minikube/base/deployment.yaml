@@ -43,20 +43,20 @@ spec:
           imagePullPolicy: IfNotPresent
           name: microservice
           ports:
-            - containerPort: 8080
+            - containerPort: 5000
               name: microservice
               protocol: TCP
           readinessProbe:
             httpGet:
-              path: /api/health
-              port: 8080
+              path: /
+              port: 5000
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 10
           livenessProbe:
             httpGet:
-              path: /api/health
-              port: 8080
+              path: /
+              port: 5000
             initialDelaySeconds: 60
             timeoutSeconds: 30
             periodSeconds: 10

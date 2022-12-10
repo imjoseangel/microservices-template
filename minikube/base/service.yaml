@@ -10,9 +10,9 @@ spec:
   type: ClusterIP
   ports:
     - name: http
-      port: 8080
+      port: 5000
       protocol: TCP
-      targetPort: 8080
+      targetPort: 5000
   selector:
     app.kubernetes.io/instance: microservice
     app.kubernetes.io/name: microservice
