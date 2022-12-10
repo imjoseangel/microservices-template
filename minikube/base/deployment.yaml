@@ -73,9 +73,6 @@ spec:
           volumeMounts:
             - mountPath: /microservice/data
               name: data
-            - mountPath: /mnt/secrets/microservice
-              name: microservice
-              readOnly: true
       volumes:
         - name: data
           persistentVolumeClaim:
