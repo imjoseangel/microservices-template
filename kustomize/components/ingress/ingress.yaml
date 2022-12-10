@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservice
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  defaultBackend:
+    service:
+      name: microservice
+      port:
+        number: 8080
+  rules:
+    - host: microservice.example.com
+      http:
+        paths:
+          - backend:
+              service:
+                name: microservice
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - microservice.example.com
+      secretName: ingress-tls-csi
