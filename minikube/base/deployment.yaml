@@ -79,6 +79,6 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: default
+            claimName: microservice
       nodeSelector:
         kubernetes.io/os: linux
