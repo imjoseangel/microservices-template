@@ -26,4 +26,4 @@ kind: Kustomization
 
 namespace: microservice
 resources:
-  - base
+  - git@github.com:imjoseangel/microservices-template.git/kustomize/base?ref=devel
