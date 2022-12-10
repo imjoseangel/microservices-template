@@ -1,0 +1,10 @@
+---
+resources:
+  - configmap.yaml
+  - deployment.yaml
+  - namespace.yaml
+  - pvc.yaml
+  - secret.yaml
+  - service.yaml
+  - serviceaccount.yaml
+  - storageclass.yaml

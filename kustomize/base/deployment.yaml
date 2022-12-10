@@ -1,0 +1,92 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/instance: microservice
+    app.kubernetes.io/name: microservice
+  name: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: microservice
+      app.kubernetes.io/name: microservice
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: microservice
+        app.kubernetes.io/name: microservice
+    spec:
+      dnsConfig:
+        options:
+          - name: ndots
+            value: '2'
+      serviceAccountName: microservice
+      containers:
+        - env:
+            - name: EXAMPLE_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  name: microservice-config
+                  key: EXAMPLE_CONFIG
+            - name: EXAMPLE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: microservice-secret
+                  key: EXAMPLE_PASSWORD
+            - name: EXAMPLE_VALUE
+              value: "true"
+          image: imjoseangel/restapi:latest
+          imagePullPolicy: IfNotPresent
+          name: microservice
+          ports:
+            - containerPort: 8080
+              name: microservice
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 8080
+            initialDelaySeconds: 60
+            timeoutSeconds: 30
+            periodSeconds: 10
+            failureThreshold: 10
+          resources:
+            requests:
+              cpu: 125m
+              memory: 250Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          securityContext:
+            allowPrivilegeEscalation: false
+          volumeMounts:
+            - mountPath: /microservice/data
+              name: data
+            - mountPath: /mnt/secrets/microservice
+              name: microservice
+              readOnly: true
+      imagePullSecrets:
+        - name: docker-registry
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: microservice
+        - name: microservice
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: microservice
+      nodeSelector:
+        kubernetes.io/os: linux
