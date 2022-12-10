@@ -35,3 +35,16 @@ components:
 #   - git@ssh.dev.azure.com:v3/<org>/<project>/microservices-template.git/kustomize/base?ref=devel
 # components:
 #   - git@ssh.dev.azure.com:v3/<org>/<project>/microservices-template.git/kustomize/components/storage?ref=devel
+
+patches:
+  - target:
+      kind: Deployment
+      name: microservice
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+
+images:
+  - name: imjoseangel/restapi
+    newTag: latest
