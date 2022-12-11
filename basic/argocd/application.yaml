@@ -8,7 +8,7 @@ spec:
   project: default
   source:
     repoURL: 'git@github.com:imjoseangel/microservices-template.git'
-    path: minikube
+    path: example
     targetRevision: HEAD
   destination:
     name: in-cluster
