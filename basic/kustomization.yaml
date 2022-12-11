@@ -26,9 +26,9 @@ kind: Kustomization
 
 namespace: microservice
 resources:
-  - git@github.com:imjoseangel/microservices-template.git/minikube/base?ref=devel
+  - git@github.com:imjoseangel/microservices-template.git/basic/base?ref=devel
 components:
-  - git@github.com:imjoseangel/microservices-template.git/minikube/components/storage?ref=devel
+  - git@github.com:imjoseangel/microservices-template.git/basic/components/storage?ref=devel
 
 ## For Azure DevOps
 # resources:
